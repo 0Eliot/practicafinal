@@ -1,15 +1,12 @@
-name: Pruebas Unitarias
+name: Pruebas Unitarias y Despliegue a Surge
 
 on:
   push:
     branches:
       - development
-  pull_request:
-    branches:
-      - development
 
 jobs:
-  test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,3 +23,9 @@ jobs:
 
     - name: Ejecutar Pruebas
       run: npm test
+
+    - name: Instalar Surge
+      run: npm install -g surge
+
+    - name: Desplegar a Surge
+      run: surge --project ./ --domain eliotfinalelectiva2.surge.sh
